@@ -39,9 +39,9 @@
   
       <a class="nav-link" href="./receiver.php">Register Reciever</a>
 
-      <a class="nav-link" href="./feedbackForm.html">FeedBack</a>
+      <a class="nav-link" href="./feedbackForm.php">FeedBack</a>
       
-      <a class="nav-link" href="./camp.html">Register Camp Details</a>
+      <a class="nav-link" href="./camp.php">Register Camp Details</a>
   
 
 </div>
@@ -80,14 +80,12 @@
 
 
 <!-- Donor id khud bnani h pass nhi krni -->
-
-
 <?php
     error_reporting(0);
     if (isset($_POST['submit'])) {
         // Retrieve the form data
-        $function_to_call = "addDonor"; 
-        $arguments = [$_POST['first_name'],$_POST['last_name'],$_POST['date_of_birth'],$_POST['gender'],$_POST['contact_number'],$_POST['email'],$_POST['city'],$_POST['blood-type']];
+        $function_to_call = "addStudent"; 
+        $arguments = [$_POST['student_id'],$_POST['name'],$_POST['sem'],$_POST['branch'],$_POST['contact_number']];
         
 
         $command = "python connector.py $function_to_call " . implode(" ", $arguments);
@@ -104,6 +102,30 @@
         echo '<script>window.location.href = "./index.php"</script>';
 
     }
+    ?>
+
+<?php
+    // error_reporting(0);
+    // if (isset($_POST['submit'])) {
+    //     // Retrieve the form data
+    //     $function_to_call = "addDonor"; 
+    //     $arguments = [$_POST['student_id'],$_POST['name'],$_POST['sem'],$_POST['gender'],$_POST['contact_number']];
+        
+
+    //     $command = "python connector.py $function_to_call " . implode(" ", $arguments);
+    //     // echo $command;
+        
+    //     // Run the Python script with the specified function and arguments and capture its output
+    //     $output = shell_exec($command);
+        
+        
+        
+    //     // Output the result
+    //     // echo $output;
+    //     echo '<script>alert("Donor registered successfully!");</script>';
+    //     echo '<script>window.location.href = "./index.php"</script>';
+
+    // }
     ?>
 
 

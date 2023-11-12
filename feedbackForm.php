@@ -72,9 +72,9 @@
           
               <a class="nav-link" href="./receiver.php">Register Reciever</a>
         
-              <a class="nav-link" href="./feedbackForm.html">FeedBack</a>
+              <a class="nav-link" href="./feedbackForm.php">FeedBack</a>
               
-              <a class="nav-link" href="./camp.html">Register Camp Details</a>
+              <a class="nav-link" href="./camp.php">Register Camp Details</a>
           
         
         </div>

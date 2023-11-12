@@ -40,9 +40,9 @@
   
       <a class="nav-link" href="./receiver.php">Register Reciever</a>
 
-      <a class="nav-link" href="./feedbackForm.html">FeedBack</a>
+      <a class="nav-link" href="./feedbackForm.php">FeedBack</a>
       
-      <a class="nav-link" href="./camp.html">Register Camp Details</a>
+      <a class="nav-link" href="./camp.php">Register Camp Details</a>
   
 
 </div>
@@ -80,15 +80,16 @@
         </div>
 
         <?php
-    error_reporting(0);
+    //error_reporting(0);
     if (isset($_POST['submit'])) {
         //$function_to_call = "findDonorForRecipient"; 
         //$arguments = [$_POST['city'],$_POST['blood-type']];
         $blood_type = $_POST['blood-type'];
         $city = $_POST['city'];
-        $conn = mysqli_connect("localhost","admin","admin","bloodbank");
+        $conn = mysqli_connect("localhost","admin","admin","blood_donation_project");
         //error_reporting(E_ERROR | E_PARSE);
-        $sql = " SELECT * FROM donor WHERE blood_type = '$blood_type' ORDER BY CASE WHEN city = '$city' THEN 0 ELSE 1 END, city;";
+       // $sql = " SELECT * FROM donates WHERE BloodType = '$blood_type' ORDER BY CASE WHEN city = '$city' THEN 0 ELSE 1 END, city;";
+        $sql = " SELECT * FROM donates WHERE BloodType = '$blood_type';";
         $output = mysqli_query($conn,$sql);
         echo "<div class='p-5'>";
         echo "<table class='table table-striped table-bordered my-5'>";
