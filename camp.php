@@ -124,7 +124,7 @@
         
         // Output the result
         //echo $output;
-        echo '<script>alert("Donor registered successfully!");</script>';
+        echo '<script>alert("Camp registered successfully!");</script>';
         echo '<script>window.location.href = "./index.php"</script>';
 
     }

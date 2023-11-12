@@ -100,18 +100,25 @@ def addStudent(StudentID,StudentName,Semester,Branch,ContactInfo):
     print(a)
     mycursor.close()
 
-def addCamp(CampID,CampName,Date):
-    mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
-                                   auth_plugin='mysql_native_password')
-    mycursor = mydb.cursor()
-    mycursor.execute("use blood_donation_project")
 
-    mycursor.execute(f"INSERT INTO bloodcamp (CampID,CampName,Date) VALUES ('{CampID}','{CampName}','{Date}');")
-    a = mycursor.fetchone()
+
+def addCamp(CampID, CampName, date):
+    mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin", auth_plugin='mysql_native_password')
+    mycursor = mydb.cursor()
+    mycursor.execute("USE blood_donation_project")
+
+    # Use parameterized queries to safely insert data
+    insert_query = "INSERT INTO bloodcamp (CampID, CampName, Date) VALUES (%s, %s, %s)"
+    data = (CampID, CampName, date)
+
+    mycursor.execute(insert_query, data)
     mydb.commit()
 
-    print(a)
+    print("Record inserted successfully")
+
     mycursor.close()
+
+
 
 
 def addStore(CampID,BankID):
