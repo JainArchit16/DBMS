@@ -41,17 +41,25 @@
     </style>
 
 <style>
-    .nav-link:hover{
-      font-weight: bold;
-      color: rgba(0, 0, 0,1);
+      .nav-link:hover{
+        font-weight: bold;
+        color: rgba(0, 0, 0,1);
 
-     
-    }
-    .nav-link{
-      font-weight: bold;
-      color: rgba(0, 0, 0, 0.5);
-    }
-  </style>
+       
+      }
+      .nav-link{
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.5);
+      }
+      .nav-link:after{
+        content:"|";
+        margin-left:10px;
+        opacity: 0.2
+      }
+      nav{
+        box-shadow: 0px 0px 12px red;
+      }
+    </style>
 
 
 </head>
@@ -59,27 +67,31 @@
 
 
 <body>
-    <nav class="d-flex flex-row justify-content-between align-items-center py-3 px-4">
-        <img src="./assets/images/logo.png" style="width: 50px;">
-        <div class="d-flex flex-row justify-content-between align-items-center gap-4">
-          <a href="index.php" class="nav-link">Home</a>
-          
-            <a class="nav-link" href="./donate.php">Donate Blood</a>
-          
-          
-              <a class="nav-link" href="./receive.php">Recieve Blood</a>
-          
-          
-              <a class="nav-link" href="./receiver.php">Register Reciever</a>
-        
-              <a class="nav-link" href="./feedbackForm.php">FeedBack</a>
-              
-              <a class="nav-link" href="./camp.php">Register Camp Details</a>
-          
-        
-        </div>
-        
-        </nav>
+<nav class="d-flex flex-row justify-content-between align-items-center py-2 px-4 bg-white mb-3">
+<img src="./assets/images/logo.png" style="width: 50px;">
+<div class="d-flex flex-row justify-content-between align-items-center gap-4">
+  <a href="index.php" class="nav-link">Home</a>
+  
+    <a class="nav-link" href="./donate.php">Donate Blood</a>
+  
+  
+      <a class="nav-link" href="./receive.php">Recieve Blood</a>
+  
+  
+      <a class="nav-link" href="./receiver.php">Register Reciever</a>
+
+      <a class="nav-link" href="./feedbackForm.php">FeedBack</a>
+      
+      <a class="nav-link" href="./camp.php">Register Camp</a>
+
+
+<a class="nav-link" href="./campDetails.php">Register Camp Details</a>
+
+  
+
+</div>
+
+</nav>
 
 
         <div class="form-container">

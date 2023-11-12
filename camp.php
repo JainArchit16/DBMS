@@ -13,50 +13,62 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <link rel="stylesheet" href="styles/donate.css">
     <style>
-        .nav-link:hover{
-          font-weight: bold;
-          color: rgba(0, 0, 0,1);
-  
-         
-        }
-        .nav-link{
-          font-weight: bold;
-          color: rgba(0, 0, 0, 0.5);
-        }
-      </style>
+      .nav-link:hover{
+        font-weight: bold;
+        color: rgba(0, 0, 0,1);
+
+       
+      }
+      .nav-link{
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.5);
+      }
+      .nav-link:after{
+        content:"|";
+        margin-left:10px;
+        opacity: 0.2
+      }
+      nav{
+        box-shadow: 0px 0px 12px red;
+      }
+    </style>
 </head>
 
 
 
 <body>
-    <nav class="d-flex flex-row justify-content-between align-items-center py-3 px-4">
-        <img src="./assets/images/logo.png" style="width: 50px;">
-        <div class="d-flex flex-row justify-content-between align-items-center gap-4">
-          <a href="index.php" class="nav-link">Home</a>
-          
-            <a class="nav-link" href="./donate.php">Donate Blood</a>
-          
-          
-              <a class="nav-link" href="./receive.php">Recieve Blood</a>
-          
-          
-              <a class="nav-link" href="./receiver.php">Register Reciever</a>
-        
-              <a class="nav-link" href="./feedbackForm.php">FeedBack</a>
-              
-              <a class="nav-link" href="./camp.php">Register Camp Details</a>
-          
-        
-        </div>
-        
-        </nav>
+<nav class="d-flex flex-row justify-content-between align-items-center py-2 px-4 bg-white mb-3">
+<img src="./assets/images/logo.png" style="width: 50px;">
+<div class="d-flex flex-row justify-content-between align-items-center gap-4">
+  <a href="index.php" class="nav-link">Home</a>
+  
+    <a class="nav-link" href="./donate.php">Donate Blood</a>
+  
+  
+      <a class="nav-link" href="./receive.php">Recieve Blood</a>
+  
+  
+      <a class="nav-link" href="./receiver.php">Register Reciever</a>
+
+      <a class="nav-link" href="./feedbackForm.php">FeedBack</a>
+      
+      <a class="nav-link" href="./camp.php">Register Camp</a>
+
+
+<a class="nav-link" href="./campDetails.php">Register Camp Details</a>
+
+  
+
+</div>
+
+</nav>
 
 
         <div class="form-container">
 
 
         
-            <h1>Recipient Information Form</h1>
+            <h1>Camp Information Form</h1>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <!-- <label for="recipient_id">Recipient ID:</label>
                 <input type="text" id="recipient_id" name="recipient_id" required> -->
@@ -68,9 +80,7 @@
                 <label for="bank_id">Bank ID:</label>
                 <input type="text" id="bank_id" name="bank_id" required>
 
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city" required>
-        
+
                 <label for="camp_name">Camp Name:</label>
                 <input type="text" id="camp_name" name="camp_name" required>
         
@@ -78,25 +88,6 @@
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date" required>
 
-
-                <label for="student_id">Enrollment Number:</label>
-                <input type="text" id="student_id" name="student_id" required>
-        
-
-                <label for="amount">Donation Amount:</label>
-                <input type="number" id="amount" name="amount" required>
-
-        
-                <label for="blood-type">Blood Type:</label>
-                    <select id="blood-type" name="blood-type" required>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B+">B-</option>
-                        <option value="B+">O+</option>
-                        <option value="B+">O-</option>
-                        <option value="B+">AB-</option>
-                    </select>
         
                 <input type="submit" value="Submit" class="btn my-2" name="submit">
             </form>
