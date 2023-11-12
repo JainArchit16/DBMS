@@ -107,12 +107,12 @@
     error_reporting(0);
     if (isset($_POST['submit'])) {
         // Retrieve the form data
-        $function_to_call = "addCamp"; 
-        $arguments = [$_POST['camp_id'],$_POST['camp_name'],$_POST['date']];
+        $function_to_call = "addDonor"; 
+        $arguments = [$_POST['student_id'],$_POST['camp_id'],$_POST['blood-type'],$_POST['amount']];
         
 
         $command = "python connector.py $function_to_call " . implode(" ", $arguments);
-        // echo $command;
+       //echo $command;
         
         // Run the Python script with the specified function and arguments and capture its output
         $output = shell_exec($command);

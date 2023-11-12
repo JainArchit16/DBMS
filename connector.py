@@ -18,25 +18,26 @@ def displayDonor(id):
     mycursor.close()
 
 
-def addDonor(StudentID,CampID,StudentName,BloodType,Amount):
+def addDonor(StudentID,CampID,BloodType,Amount):
     print("yahan tk aaayr")
     mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
                                    auth_plugin='mysql_native_password')
     mycursor = mydb.cursor()
     mycursor.execute("use blood_donation_project")
     print()
-    mycursor.execute("""
-CREATE TRIGGER UpdateStores
-AFTER INSERT ON Donate
-FOR EACH ROW
-BEGIN
-    UPDATE Stores
-    SET Quantity = Quantity + NEW.Amount
-    WHERE CampID = NEW.CampID AND BankID = (SELECT BankID FROM BloodBank WHERE BloodType = NEW.BloodGroup);
-END;
-""")
 
-    mycursor.execute(f"INSERT INTO donor (StudentID,CampID,StudentName,BloodType,Amount) VALUES ('{StudentID}', '{CampID}', '{StudentName}', '{BloodType}', '{Amount}')" )
+#     mycursor.execute("""
+# CREATE TRIGGER UpdateStores
+# AFTER INSERT ON donates
+# FOR EACH ROW
+# BEGIN
+#     UPDATE Stores
+#     SET Quantity = Quantity + '{Amount}'
+#     WHERE CampID = NEW.CampID AND BankID = (SELECT BankID FROM BloodBank WHERE BloodType = '{BloodType}');
+# END;
+# """)
+
+    mycursor.execute(f"INSERT INTO donates (StudentID,CampID,StudentName,BloodType,Amount) VALUES ('{StudentID}', '{CampID}', (SELECT StudentName from student where StudentID='{StudentID}'), '{BloodType}', '{Amount}')" )
     a = mycursor.fetchone()
     mydb.commit()
 
@@ -113,6 +114,39 @@ def addCamp(CampID,CampName,Date):
     mycursor.close()
 
 
+def addStore(CampID,BankID):
+    mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
+                                   auth_plugin='mysql_native_password')
+    mycursor = mydb.cursor()
+    mycursor.execute("use blood_donation_project")
+
+    mycursor.execute(f"INSERT INTO stores (CampID,BankID) VALUES ('{CampID}','{BankID}');")
+    a = mycursor.fetchone()
+    mydb.commit()
+
+    print(a)
+    mycursor.close()
+
+def addBloodBank(BankID):
+    mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
+                                   auth_plugin='mysql_native_password')
+    mycursor = mydb.cursor()
+    mycursor.execute("use blood_donation_project")
+
+    mycursor.execute(f"INSERT INTO bloodbank (BankID,BloodType,Quantity) VALUES ('{BankID}','A+','0');")
+    mycursor.execute(f"INSERT INTO bloodbank (BankID,BloodType,Quantity) VALUES ('{BankID}','A-','0');")
+    mycursor.execute(f"INSERT INTO bloodbank (BankID,BloodType,Quantity) VALUES ('{BankID}','B-','0');")
+    mycursor.execute(f"INSERT INTO bloodbank (BankID,BloodType,Quantity) VALUES ('{BankID}','O+','0');")
+    mycursor.execute(f"INSERT INTO bloodbank (BankID,BloodType,Quantity) VALUES ('{BankID}','O-','0');")
+    mycursor.execute(f"INSERT INTO bloodbank (BankID,BloodType,Quantity) VALUES ('{BankID}','AB-','0');")
+    mycursor.execute(f"INSERT INTO bloodbank (BankID,BloodType,Quantity) VALUES ('{BankID}','B+','0');")
+    a = mycursor.fetchone()
+    mydb.commit()
+
+    print(a)
+    mycursor.close()
+
+
 
 
 
@@ -129,6 +163,7 @@ def addCamp(CampID,CampName,Date):
 
  
 print("haiss")
+
 #displayDonor("A+")
 #addDonor("12","name","lastname","20-1-2005","male" , "696969969696","test@gamil.com","Delhi","A+")
 
@@ -142,7 +177,7 @@ if function_name == "displayDonor":
     #result = function_one(args[0], args[1])
 elif function_name == "addDonor":
     
-    addDonor(args[0],args[1],args[2],args[3],args[4])
+    addDonor(args[0],args[1],args[2],args[3])
     #print("Usage: python myscript.py function_two [arg1] [arg2] [arg3]")
     sys.exit(1)
 #result = function_two(args[0], args[1], args[2])
@@ -164,6 +199,12 @@ elif function_name == "addStudent":
 elif function_name == "addCamp":
     addCamp(args[0],args[1],args[2])
     sys.exit(1)   
+elif function_name == "addStore":
+    addStore(args[0],args[1])
+    sys.exit(1)
+elif function_name == "addBloodBank":
+    addBloodBank(args[0])
+    sys.exit(1)
 else:
     print("Invalid function name")
     sys.exit(1)

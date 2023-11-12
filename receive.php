@@ -98,11 +98,11 @@
         //$function_to_call = "findDonorForRecipient"; 
         //$arguments = [$_POST['city'],$_POST['blood-type']];
         $blood_type = $_POST['blood-type'];
-        $city = $_POST['city'];
+        $camp_id = $_POST['camp_id'];
         $conn = mysqli_connect("localhost","admin","admin","blood_donation_project");
         //error_reporting(E_ERROR | E_PARSE);
-       // $sql = " SELECT * FROM donates WHERE BloodType = '$blood_type' ORDER BY CASE WHEN city = '$city' THEN 0 ELSE 1 END, city;";
-        $sql = " SELECT * FROM donates WHERE BloodType = '$blood_type';";
+        $sql = " SELECT * FROM donates WHERE BloodType = '$blood_type' ORDER BY CASE WHEN CampID = '$camp_id' THEN 0 ELSE 1 END, CampID;";
+        //$sql = " SELECT * FROM donates WHERE BloodType = '$blood_type';";
         $output = mysqli_query($conn,$sql);
         echo "<div class='p-5'>";
         echo "<table class='table table-striped table-bordered my-5'>";

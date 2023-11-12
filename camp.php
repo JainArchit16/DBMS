@@ -95,7 +95,7 @@
             </div>
 
             <?php
-    error_reporting(0);
+    //error_reporting(0);
     if (isset($_POST['submit'])) {
         // Retrieve the form data
         $function_to_call = "addCamp"; 
@@ -104,19 +104,33 @@
 
         $command = "python connector.py $function_to_call " . implode(" ", $arguments);
         // echo $command;
-        
-        // Run the Python script with the specified function and arguments and capture its output
         $output = shell_exec($command);
+
+        $arguments = [$_POST['bank_id']];
+
+        $command = "python connector.py addBloodBank " . implode(" ", $arguments);
+        //echo $command;
+        $output = shell_exec($command);
+
+        $arguments = [$_POST['camp_id'],$_POST['bank_id']];
+
+        $command = "python connector.py addStore " . implode(" ", $arguments);
+        //echo $command;
+        $output = shell_exec($command);
+
+        
         
         
         
         // Output the result
-        // echo $output;
+        //echo $output;
         echo '<script>alert("Donor registered successfully!");</script>';
         echo '<script>window.location.href = "./index.php"</script>';
 
     }
+    //store , bloodbank
     ?>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </html>
+
