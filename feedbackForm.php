@@ -128,6 +128,30 @@
             </form>
 
             </div>
+
+            <?php
+              error_reporting(0);
+              if (isset($_POST['submit'])) {
+                  // Retrieve the form data
+                  $function_to_call = "addRating"; 
+                  $arguments = [$_POST['student_id'],$_POST['camp_id'],$_POST['rating']];
+                  
+
+                  $command = "python connector.py $function_to_call " . implode(" ", $arguments);
+                //echo $command;
+                  
+                  // Run the Python script with the specified function and arguments and capture its output
+                  $output = shell_exec($command);
+                  
+                  
+                  
+                  // Output the result
+                  // echo $output;
+                  echo '<script>alert("Thank You for Rating!");</script>';
+                  echo '<script>window.location.href = "./index.php"</script>';
+
+              }
+    ?>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </html>

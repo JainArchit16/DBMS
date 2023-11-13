@@ -2,6 +2,30 @@ import sys
 import mysql.connector
 
 
+import random
+import string
+
+import random
+import string
+
+def generate_random_integer():
+    random_integer = ''.join(random.choices(string.digits, k=3))
+    return int(random_integer)
+
+
+def integer_exists_in_database(integer, database):
+    return integer in database
+
+
+database = set()
+
+
+
+
+
+
+
+
 
 def displayDonor(id):
     mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
@@ -60,17 +84,26 @@ def findDonorForRecipient( city , blood_type):
     mycursor.close()
 
 
-def addReceiver(first_name, last_name, date_of_birth, gender, contact_number, email, city,blood_type):
+def addReceiver(Name,ContactInfo,BloodType,Amount):
+
+    while True:
+        random_integer = generate_random_integer()
+        if not integer_exists_in_database(random_integer, database):
+            database.add(random_integer)
+            break
+
+    print("Your RecepientID:", random_integer)
+
     mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
                                    auth_plugin='mysql_native_password')
     mycursor = mydb.cursor()
     mycursor.execute("use blood_donation_project")
 
-    mycursor.execute(f"INSERT INTO recipient (first_name, last_name, date_of_birth, gender, contact_number, email, city, blood_type) VALUES ('{first_name}', '{last_name}', '{date_of_birth}', '{gender}', '{contact_number}', '{email}', '{city}', '{blood_type}')" )
-    a = mycursor.fetchone()
+    mycursor.execute(f"INSERT INTO recepient (RecepientID,Name,ContactInfo,BloodType,Amount) VALUES ({random_integer}, '{Name}', '{ContactInfo}', '{BloodType}', '{Amount}')" )
+    # a = mycursor.fetchone()
     mydb.commit()
 
-    print(a)
+    # print(a)
     mycursor.close()
 
 def addBloodDonation(donor_id , blood_type , donation_amount , donation_center ):
@@ -153,6 +186,36 @@ def addBloodBank(BankID):
     print(a)
     mycursor.close()
 
+def addRating(StudentID,CampID,Rating):
+    mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
+                                   auth_plugin='mysql_native_password')
+    mycursor = mydb.cursor()
+    mycursor.execute("use blood_donation_project")
+
+    mycursor.execute(f"INSERT INTO rating (StudentID,CampID,Rating) VALUES ('{StudentID}','{CampID}','{Rating}');")
+    a = mycursor.fetchone()
+    mydb.commit()
+
+    print(a)
+    mycursor.close()
+
+def updateBloodBank(BankID,BloodType,Quantity):
+        mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
+                                   auth_plugin='mysql_native_password')
+        mycursor = mydb.cursor()
+        mycursor.execute("use blood_donation_project")
+
+        mycursor.execute(f"""
+UPDATE bloodbank
+SET Quantity = Quantity + {Quantity}
+WHERE BloodType = '{BloodType}' AND BankID = {BankID};
+
+""")
+        a = mycursor.fetchone()
+        mydb.commit()
+
+        print(a)
+        mycursor.close()
 
 
 
@@ -168,8 +231,9 @@ def addBloodBank(BankID):
 
 
 
- 
-print("haiss")
+
+
+
 
 #displayDonor("A+")
 #addDonor("12","name","lastname","20-1-2005","male" , "696969969696","test@gamil.com","Delhi","A+")
@@ -195,7 +259,7 @@ elif function_name == "findDonorForRecipient":
     sys.exit(1)
     
 elif function_name == "addReceiver":
-    addReceiver(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7])
+    addReceiver(args[0],args[1],args[2],args[3])
     sys.exit(1)
 elif function_name == "addBloodDonation":
     addBloodDonation(args[0],args[1],args[2],args[3])
@@ -211,6 +275,12 @@ elif function_name == "addStore":
     sys.exit(1)
 elif function_name == "addBloodBank":
     addBloodBank(args[0])
+    sys.exit(1)
+elif function_name == "addRating":
+    addRating(args[0],args[1],args[2])
+    sys.exit(1)
+elif function_name == "updateBloodBank":
+    updateBloodBank(args[0],args[1],args[2])
     sys.exit(1)
 else:
     print("Invalid function name")

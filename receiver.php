@@ -108,21 +108,31 @@
     if (isset($_POST['submit'])) {
         // Retrieve the form data
         $function_to_call = "addReceiver"; 
-        $arguments = [$_POST['first_name'],$_POST['last_name'],$_POST['date_of_birth'],$_POST['gender'],$_POST['contact_number'],$_POST['email'],$_POST['city'],$_POST['blood-type']];
+        $arguments = [$_POST['name'],$_POST['contact_number'],$_POST['blood-type'],$_POST['amount']];
         $command = "python connector.py $function_to_call " . implode(" ", $arguments);
         $output = shell_exec($command);
+        $myid = $output;
         //echo $command;
         $function_to_call = "addBloodDonation"; 
         $arguments = [$_POST['donor_id'],$_POST['blood-type'],$_POST['amount'],$_POST['center']];
         $command = "python connector.py $function_to_call " . implode(" ", $arguments);
-        // Run the Python script with the specified function and arguments and capture its output
         $output = shell_exec($command);
-        echo '<script>alert("Receiver registered successfully!");</script>';
+        //echo $command;
+
+        $function_to_call = "updateBloodBank"; 
+        $arguments = [$_POST['bank_id'],$_POST['blood-type'],$_POST['amount']];
+        $command = "python connector.py $function_to_call " . implode(" ", $arguments);
+        $output = shell_exec($command);
+        //echo $command;
+
+        
+        echo '<script>alert("Receiver registered successfully!\n ' .$myid.'");</script>';
+        
         echo '<script>window.location.href = "./index.php"</script>';
         
         
         // Output the result
-       // echo $output;
+        //echo $id;
 
     }
     ?>
