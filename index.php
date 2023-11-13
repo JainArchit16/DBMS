@@ -178,7 +178,10 @@
    error_reporting(0);
   
        $conn = mysqli_connect("localhost","admin","admin","blood_donation_project");
-       $sql = "SELECT CampID, AVG(Rating) AS AvgRating FROM rating GROUP BY CampID;";
+       $sql = "SELECT bc.CampID, bc.CampName, AVG(r.Rating) AS AvgRating
+       FROM bloodcamp bc
+       LEFT JOIN rating r ON bc.CampID = r.CampID
+       GROUP BY bc.CampID, bc.CampName;";
        $output = mysqli_query($conn,$sql);
        echo "<div class='p-5'>";
        echo "<table class='table table-striped table-bordered my-1'>";
