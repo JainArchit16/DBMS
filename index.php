@@ -135,8 +135,8 @@
    <?php
    error_reporting(0);
   
-       $conn = mysqli_connect("localhost","admin","admin","bloodbank");
-       $sql = " SELECT * FROM blooddonation;";
+       $conn = mysqli_connect("localhost","admin","admin","blood_donation_project");
+       $sql = " SELECT * FROM donates;";
        $output = mysqli_query($conn,$sql);
        echo "<div class='p-5'>";
        echo "<table class='table table-striped table-bordered my-1'>";
