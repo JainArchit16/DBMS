@@ -119,11 +119,7 @@
         $output = shell_exec($command);
         //echo $command;
 
-        $function_to_call = "updateBloodBank"; 
-        $arguments = [$_POST['bank_id'],$_POST['blood-type'],$_POST['amount']];
-        $command = "python connector.py $function_to_call " . implode(" ", $arguments);
-        $output = shell_exec($command);
-        //echo $command;
+        
 
         
         echo '<script>alert("Receiver registered successfully!\n ' .$myid.'");</script>';

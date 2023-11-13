@@ -199,7 +199,7 @@ def addRating(StudentID,CampID,Rating):
     print(a)
     mycursor.close()
 
-def updateBloodBank(BankID,BloodType,Quantity):
+def updateBloodBank(CampID,BloodType,Quantity):
         mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
                                    auth_plugin='mysql_native_password')
         mycursor = mydb.cursor()
@@ -208,7 +208,7 @@ def updateBloodBank(BankID,BloodType,Quantity):
         mycursor.execute(f"""
 UPDATE bloodbank
 SET Quantity = Quantity + {Quantity}
-WHERE BloodType = '{BloodType}' AND BankID = {BankID};
+WHERE BloodType = '{BloodType}' AND BankID = (SELECT BankID FROM stores WHERE CampID = {CampID});
 
 """)
         a = mycursor.fetchone()

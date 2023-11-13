@@ -112,9 +112,15 @@
                   $command = "python connector.py $function_to_call " . implode(" ", $arguments);
                 //echo $command;
                   
-                  // Run the Python script with the specified function and arguments and capture its output
-                  $output = shell_exec($command);
                   
+                  $output = shell_exec($command);
+
+                  $function_to_call = "updateBloodBank"; 
+                  $arguments = [$_POST['camp_id'],$_POST['blood-type'],$_POST['amount']];
+                  $command = "python connector.py $function_to_call " . implode(" ", $arguments);
+                  $output = shell_exec($command);
+                  //echo $command;
+                            
                   
                   
                   // Output the result
