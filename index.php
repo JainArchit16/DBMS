@@ -165,6 +165,48 @@
    ?>
 
 </section>
+
+<section id="about" class="contianer-fluid about-us">
+       <div class="container">
+           <div class="row session-title">
+               <h2>Ratings</h2>
+           </div>
+</div>
+
+
+   <?php
+   error_reporting(0);
+  
+       $conn = mysqli_connect("localhost","admin","admin","blood_donation_project");
+       $sql = "SELECT CampID, AVG(Rating) AS AvgRating FROM rating GROUP BY CampID;";
+       $output = mysqli_query($conn,$sql);
+       echo "<div class='p-5'>";
+       echo "<table class='table table-striped table-bordered my-1'>";
+       echo "<thead class='thead-dark'><tr>";
+       
+       // Output column headers
+       foreach (mysqli_fetch_fields($output) as $field) {
+           echo "<th>{$field->name}</th>";
+       }
+       
+       echo "</tr></thead><tbody>";
+       
+       while ($row = mysqli_fetch_assoc($output)) {
+           echo "<tr>";
+       
+           // Access the data in each row
+           foreach ($row as $item) {
+               echo "<td>$item</td>";
+           }
+       
+           echo "</tr>";
+       }
+       
+       echo "</tbody></table>";
+       echo "</div>";
+   ?>
+
+</section>
     
     
 </body>
